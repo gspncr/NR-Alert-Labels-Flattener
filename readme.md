@@ -2,6 +2,7 @@
 
 ![](https://p74.f4.n0.cdn.getcloudapp.com/items/4guyO1pJ/Screenshot%202020-04-28%20at%2013.19.41.png?v=0df28fda97991117bd6bc2910313af85)
 Turn this notification channel into this Event:
+
 ![](https://p74.f4.n0.cdn.getcloudapp.com/items/WnuGlB8m/Image%202020-04-28%20at%201.15.41%20pm.png?v=c3b34192553d6810b6622f67b8fafd12)
 
 Host the webhook somewhere it is always listening and accessible from New Relic Alerts. 
