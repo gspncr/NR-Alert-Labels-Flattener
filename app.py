@@ -1,5 +1,5 @@
-import os, json, requests, logging
-from flask import Flask, request, abort
+import json, requests, logging
+from flask import Flask, request
 
 logging.basicConfig(filename='webhook.log',level=logging.INFO)
 
@@ -22,7 +22,6 @@ def webhook():
     NRDetails = str(bodyParsed['details'])
     NRDuration = str(bodyParsed['duration'])
     NREventType = str(bodyParsed['event_type'])
-    NRLabels = str(bodyParsed['targets'])
     try:
         NRLabels = bodyParsed['targets'][0]['labels']
         FlattenedLabels = flatten_json(str(NRLabels))
@@ -34,11 +33,10 @@ def webhook():
         payload = [{"eventType": 'NrIntegrationError',"label_state": labelState, "account_id" : NRAccountID}]
 
     response = sendToInsights(payload)
-    logging.debug(response)
     return response
 
 def sendToInsights(payload):
-    logging.info(payload)
+    logging.debug(payload)
     response = requests.post(EventAPI, verify=True, headers={'Content-type':'application/octet-stream' ,'X-Insert-Key': InsertKey}, json=payload)
     logging.debug(response.text)
     return response.text
