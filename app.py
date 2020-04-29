@@ -26,7 +26,20 @@ def webhook():
         NRLabels = bodyParsed['targets'][0]['labels']
         FlattenedLabels = flatten_json(str(NRLabels))
         labels = str(FlattenedLabels['']).replace('{', '').replace('}', '').replace("'", '')
-        payload = [{"eventType": EventType, "label_state": 'labels sent', "account_id" : NRAccountID, "labels_flattened": labels}]
+        payload = [{
+            "eventType": EventType, 
+            "label_state": 'labels sent', 
+            "account_id" : NRAccountID, 
+            "labels_flattened": labels,
+            "account_name": NRAccountName,
+            "incident_id": NRIncidentID,
+            "condition_family_id": NRConditionFamilyId,
+            "condition_name": NRConditionName,
+            "current_state": NRCurrentState,
+            "details": NRDetails,
+            "duration": NRDuration,
+            "event_type": NREventType
+        }]
     except:
         labelState = "no labels sent on incident ID: " + NRIncidentID
         logging.info(labelState)
